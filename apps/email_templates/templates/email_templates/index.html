@@ -1,0 +1,247 @@
+{% extends "default.html" %}
+{% load static %}
+{% load site_tags %}
+{% block content %}
+<!--begin::Content-->
+<div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Subheader-->
+	<div class="subheader py-2 py-lg-4  subheader-solid " id="kt_subheader">
+		<div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+			<!--begin::Info-->
+			<div class="d-flex align-items-center flex-wrap mr-1">
+				<!--begin::Page Heading-->
+				<div class="d-flex align-items-baseline flex-wrap mr-5">
+					<!--begin::Page Title-->
+					<h5 class="text-dark font-weight-bold my-1 mr-5">
+						{{model_name_plural}}
+					</h5>
+					<!--end::Page Title-->
+					<!--begin::Breadcrumb-->
+					<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+						<li class="breadcrumb-item">
+							<a href="{% url 'dashboard.index'%}" class="text-muted">Dashboard</a>
+						</li>
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page Heading-->
+			</div>
+			<!--end::Info-->
+		</div>
+	</div>
+	<!--end::Subheader-->
+	<!--begin::Entry-->
+	<div class="d-flex flex-column-fluid">
+		<!--begin::Container-->
+		<div class=" container ">
+			<form action="{% url 'email_templates.index' %}" class="kt-form kt-form--fit mb-0" autocomplete="off">
+				<div class="row">
+					<div class="col-12">
+						<div class="card card-custom card-stretch card-shadowless">
+							<div class="card-header">
+								<div class="card-title">
+								</div>
+								<div class="card-toolbar">
+									<a href="javascript:void(0);" class="btn btn-primary dropdown-toggle mr-2"
+										data-toggle="collapse" data-target="#collapseOne6">
+										Search
+									</a>		
+									
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
+									<div id="collapseOne6" class="{% if searching_variables %} show {% endif %}collapse" data-parent="#accordionExample6">
+										<div>
+											<div class="row mb-6">
+												<div class="col-lg-3 mb-lg-5 mb-6">
+													<label>Name</label>
+													<input type="text" name="name" value="{{searching_variables.name}}"
+														class="form-control" placeholder="Name" />
+												</div>
+												<div class="col-lg-3 mb-lg-5 mb-6">
+													<label>Subject</label>
+													<input type="text" name="subject"
+														value="{{searching_variables.subject}}" class="form-control"
+														placeholder="Subject" />
+												</div>
+											</div>
+											<div class="row mt-8">
+												<div class="col-lg-12">
+													<button class="btn btn-primary btn-primary--icon" id="kt_search">
+														<span>
+															<i class="la la-search"></i>
+															<span>Search</span>
+														</span>
+													</button>
+													&nbsp;&nbsp;
+
+													<a href="{% url 'email_templates.index' %}"
+														class="btn btn-secondary btn-secondary--icon">
+														<span>
+															<i class="la la-close"></i>
+															<span>Clear Search</span>
+														</span>
+													</a>
+												</div>
+											</div>
+											<!--begin: Datatable-->
+											<hr>
+										</div>
+									</div>
+								</div>
+								<div class="dataTables_wrapper ">
+									<div class="table-responsive">
+										<table
+											class="table dataTable table-head-custom table-head-bg table-borderless table-vertical-center"
+											id="taskTable">
+											<thead>
+												<tr class="text-uppercase">
+													<th class="sorting">
+														<a
+															href="?page={{ page }}&order_by=name&direction={% if direction == 'ASC' and order_by == 'name' %}DESC{% else %}ASC{% endif %}{% if query_string != '' %}&{{query_string}}{% endif %}">
+															Name
+														</a>
+													</th>
+													<th class="sorting">
+														<a
+															href="?page={{ page }}&order_by=subject&direction={% if direction == 'ASC' and order_by == 'subject' %}DESC{% else %}ASC{% endif %}{% if query_string != '' %}&{{query_string}}{% endif %}">
+															Subject
+														</a>
+													</th>
+													<th class="sorting">
+														<a
+															href="?page={{ page }}&order_by=created_at&direction={% if direction == 'ASC' and order_by == 'created_at' %}DESC{% else %}ASC{% endif %}{% if query_string != '' %}&{{query_string}}{% endif %}">
+															Created On
+														</a>
+													</th>
+													<th class="text-right">
+														Action
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% if results %}
+													{%for data in results%}
+														<tr>
+															<td>
+																<div class="text-dark-75 mb-1 font-size-lg">
+																	{{data.name|title}}
+																</div>
+															</td>
+															<td>
+																<div class="text-dark-75 mb-1 font-size-lg">
+																	{{data.subject|title}}
+																</div>
+															</td>
+															<td>
+																<div class="text-dark-75 mb-1 font-size-lg">
+																	{{data.updated_at |date:"m-d-Y" }}
+																</div>
+															</td>
+															<td class="text-right pr-2">
+																{% if 'email_templates.edit' in actions or isAdmin %}
+																<a href="{% url 'email_templates.edit' data.id %}"
+																	class="btn btn-icon btn-light btn-hover-primary btn-sm"
+																	data-toggle="tooltip" data-placement="top"
+																	data-container="body" data-boundary="window" title=""
+																	data-original-title="Edit">
+																	<span class="svg-icon svg-icon-md svg-icon-primary">
+																		<svg xmlns="http://www.w3.org/2000/svg"
+																			xmlns:xlink="http://www.w3.org/1999/xlink"
+																			width="24px" height="24px" viewBox="0 0 24 24"
+																			version="1.1">
+																			<g stroke="none" stroke-width="1" fill="none"
+																				fill-rule="evenodd">
+																				<rect x="0" y="0" width="24" height="24" />
+																				<path
+																					d="M3,16 L5,16 C5.55228475,16 6,15.5522847 6,15 C6,14.4477153 5.55228475,14 5,14 L3,14 L3,12 L5,12 C5.55228475,12 6,11.5522847 6,11 C6,10.4477153 5.55228475,10 5,10 L3,10 L3,8 L5,8 C5.55228475,8 6,7.55228475 6,7 C6,6.44771525 5.55228475,6 5,6 L3,6 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 C10.5522847,3 11,3.44771525 11,4 L11,19 C11,19.5522847 10.5522847,20 10,20 L4,20 C3.44771525,20 3,19.5522847 3,19 L3,16 Z"
+																					fill="#000000" opacity="0.3" />
+																				<path
+																					d="M16,3 L19,3 C20.1045695,3 21,3.8954305 21,5 L21,15.2485298 C21,15.7329761 20.8241635,16.200956 20.5051534,16.565539 L17.8762883,19.5699562 C17.6944473,19.7777745 17.378566,19.7988332 17.1707477,19.6169922 C17.1540423,19.602375 17.1383289,19.5866616 17.1237117,19.5699562 L14.4948466,16.565539 C14.1758365,16.200956 14,15.7329761 14,15.2485298 L14,5 C14,3.8954305 14.8954305,3 16,3 Z"
+																					fill="#000000" />
+																			</g>
+																		</svg>
+																	</span>
+																</a>
+																{% endif %}
+															</td>
+														</tr>
+													{% endfor %}
+												{% else %}
+												<tr>
+													<td colspan="6" style="text-align:center;">
+														Record not found.
+													</td>
+												</tr>
+												{% endif %}
+											</tbody>
+										</table>
+									</div>
+									{% include "paginations.html" %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!--end::Container-->
+	</div>
+	<!--end::Entry-->
+</div>
+<!--end::Content-->
+
+<script>
+	$(document).ready(function () {
+		$('#datepickerfrom').datetimepicker({
+			format: 'YYYY-MM-DD'
+		});
+		$('#datepickerto').datetimepicker({
+			format: 'YYYY-MM-DD'
+		});
+
+		$(".confirmDelete").click(function (e) {
+			e.stopImmediatePropagation();
+			url = $(this).attr('href');
+			Swal.fire({
+				title: "Are you sure?",
+				text: "Want to delete this ?",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Yes, delete it",
+				cancelButtonText: "No, cancel",
+				reverseButtons: true
+			}).then(function (result) {
+				if (result.value) {
+					window.location.replace(url);
+				} 
+			});
+			e.preventDefault();
+		});
+
+		$(".status_any_item").click(function (e) {
+			e.stopImmediatePropagation();
+			url = $(this).attr('href');
+			Swal.fire({
+				title: "Are you sure?",
+				text: "Want to change status this ?",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Yes, change it",
+				cancelButtonText: "No, cancel",
+				reverseButtons: true
+			}).then(function (result) {
+				if (result.value) {
+					window.location.replace(url);
+				}
+			});
+			e.preventDefault();
+		});
+	});
+
+	function page_limit() {
+		$("form").submit();
+	}
+</script>
+{% endblock %}

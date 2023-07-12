@@ -1,0 +1,86 @@
+{% extends "base_login.html" %}
+{% load static %}
+{% load site_tags %}
+{% block content %}
+<!--begin::Main-->
+<div class="d-flex flex-column flex-root">
+    <div class="login login-4 wizard d-flex flex-column flex-lg-row flex-column-fluid">
+        <!--begin::Content-->
+        <div class="login-container d-flex flex-center bgi-size-cover bgi-no-repeat flex-row-fluid p-8">
+            <!--begin::Wrapper-->
+            <div class="login-content d-flex flex-column card p-5 p-md-10">
+                <!--begin::Logo-->
+                <a href="{% url 'login' %}" class="login-logo pb-8 text-center">
+                  <!--   <img src="{% site_logo %}" class="max-h-80px" alt="" /> -->
+                  <img alt="Logo" src="{% static 'img/logo.png' %}" />
+                </a>
+                <!--end::Logo-->
+                <!--begin::Signin-->
+                <div class="login-form">
+                    <!--begin::Form-->
+                    <form action="{% url 'login' %}" method="POST" class="form" id="kt_login_singin_form"
+                        autocomplete="off">
+                        <!--begin::Title-->
+                        {% csrf_token %}
+                        <div class="mb-12 text-center">
+                            <h3 class="font-weight-bold text-dark">Sign In</h3>
+                            <p>Enter your details to login to your account:</p>
+                        </div>
+                        <!--begin::Title-->
+                        <!-- begin::Form group -->
+                        {% for field in form %}
+                            <div class="form-group">
+                                {% if field.name == 'email' %}
+                                    <label class="font-size-h6 font-weight-bolder text-dark">{{field.label}}</label>
+                                    {{field}}
+                                    <div class="invalid-feedback">
+                                        {{field.errors.as_text | cut:"* "}}
+                                    </div>
+                                {% elif field.name == 'password' %}
+                                    <div class="d-flex justify-content-between mt-n5">
+                                        <label class="font-size-h6 font-weight-bolder text-dark pt-5">{{field.label}}</label>
+                                        <a href="{% url 'login.forgot_password' %}"
+                                            class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">
+                                            Forgot Password ?
+                                        </a>
+                                    </div>
+                                    {{field}}
+                                    <div class="invalid-feedback">
+                                        {{field.errors.as_text | cut:"* "}}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        <!--begin::Action-->
+                        <div class="text-center">
+                            <button type="submit" id="kt_login_submit"
+                                class="btn btn-primary font-weight-bolder font-size-h6 px-12 py-4 my-3">
+                                Login
+                            </button>
+                            
+                        </div>
+                        <!--end::Action-->
+                    </form>
+                    <!--end::Form-->
+                </div>
+                <!--end::Signin-->
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--begin::Content-->
+    </div>
+</div>
+<!--end::Main-->
+<script>
+    jQuery(document).ready(function () {
+        $('input').keypress(function (e) {
+            if (e.which == 13) {
+                $("#kt_login_singin_form").submit();
+            }
+        });
+        $("#kt_login_submit").click(function (e) {
+            $("#kt_login_singin_form").submit();
+        });
+    });
+</script>
+{% endblock %}

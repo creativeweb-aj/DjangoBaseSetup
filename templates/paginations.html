@@ -1,0 +1,73 @@
+<div class="row">
+	<div class="col-sm-12 col-md-5">
+		<div class="dataTables_info">
+			Showing 1 to {{total_record}} of {{total_record}} entries
+		</div>
+	</div>
+	<div class="col-sm-12 col-md-7">
+		<div class="d-flex justify-content-end align-items-center">
+			<div class="dataTables_length mr-4">
+				<label class="mb-0">
+					Show
+				</label>
+				<select name="page_size" onchange="page_limit()"
+					class="custom-select custom-select-sm form-control form-control-sm">
+					<option value="">Default</option>
+					<option value="15" {% if page_size == 15 %} selected {% endif %}>15</option>
+					<option value="20" {% if page_size == 20 %} selected {% endif %}>20</option>
+					<option value="30" {% if page_size == 30 %} selected {% endif %}>30</option>
+					<option value="50" {% if page_size == 50 %} selected {% endif %}>50</option>
+					<option value="100" {% if page_size == 100 %} selected {% endif %}>100</option>
+				</select>
+			</div>
+			<div class="dataTables_paginate paging_full_numbers">
+				<ul class="pagination">
+					{% if results.has_previous %}
+						<li class="paginate_button page-item previous">
+							<a href="?page={{ results.previous_page_number }}&order_by={{order_by}}&direction={{direction}}{% if query_string != '' %}&{{query_string}}{% endif %}"
+								class="page-link">
+								<i class="ki ki-arrow-back"></i>
+							</a>
+						</li>
+					{% else %}
+						<li class="paginate_button page-item first disabled">
+							<a href="javascript.void(0);" class="page-link">
+								<i class="ki ki-double-arrow-back"></i>
+							</a>
+						</li>
+					{% endif %}
+					{% for i in page_range %}
+						{% if results.number == i %}
+							<li class="paginate_button page-item previous active">
+								<a href="javascript:void(0);" class="page-link">
+									{{ i }}
+								</a>
+							</li>
+						{% else %}
+							<li class="paginate_button page-item">
+								<a href="?page={{ i }}&order_by={{order_by}}&direction={{direction}}{% if query_string != '' %}&{{query_string}}{% endif %}"
+									class="page-link">
+									{{ i }}
+								</a>
+							</li>
+						{% endif %}
+					{% endfor %}
+					{% if results.has_next %}
+						<li class="paginate_button page-item last">
+							<a href="?page={{ results.next_page_number }}&order_by={{order_by}}&direction={{direction}}{% if query_string != '' %}&{{query_string}}{% endif %}"
+								class="page-link">
+								<i class="ki ki-arrow-next"></i>
+							</a>
+						</li>
+					{% else %}
+						<li class="paginate_button page-item next disabled">
+							<a href="javascript.void(0);" class="page-link">
+								<i class="ki ki-double-arrow-next"></i>
+							</a>
+						</li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

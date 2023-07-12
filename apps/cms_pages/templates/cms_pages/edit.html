@@ -1,0 +1,140 @@
+{% extends "default.html" %}
+{% load static %}
+{% block content %}
+<!--begin::Content-->
+<div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Subheader-->
+    <div class="subheader py-2 py-lg-4  subheader-solid " id="kt_subheader">
+        <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+            <!--begin::Info-->
+            <div class="d-flex align-items-center flex-wrap mr-1">
+                <!--begin::Page Heading-->
+                <div class="d-flex align-items-baseline flex-wrap mr-5">
+                    <!--begin::Page Title-->
+                    <h5 class="text-dark font-weight-bold my-1 mr-5">
+                        Edit {{model_name_singular}}
+                    </h5>
+                    <!--end::Page Title-->
+
+                    <!--begin::Breadcrumb-->
+                    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'dashboard.index' %}" class="text-muted">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'cms_pages.index'  %}" class="text-muted">{{model_name_plural}}</a>
+                        </li>
+                        <!-- <li class="active"> Add New Cms Page</li> -->
+                    </ul>
+                    <!--end::Breadcrumb-->
+                </div>
+                <!--end::Page Heading-->
+            </div>
+            <!--end::Info-->
+        </div>
+    </div>
+    <!--end::Subheader-->
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <form action="{% url 'cms_pages.edit' cms_page_detail.id %}" enctype="multipart/form-data" method="POST" autocomplete="off" class='mws-form'>
+                {% csrf_token %}
+                <div class="card card-custom gutter-b">
+                    {% if languages|length > 1 %}
+                        <div class="card-header card-header-tabs-line">
+                            <div class="card-toolbar border-top">
+                                <ul class="nav nav-tabs nav-bold nav-tabs-line">
+                                    {% for language in languages %}
+                                        <li class="nav-item">
+                                            <a class="nav-link {% if language.lang_code == 'en' %}active{% endif %}" data-toggle="tab"
+                                                href="#{{language.lang_code}}div">
+                                                <span class="symbol symbol-20 mr-3">
+                                                    <img src="{% static 'img/flag.svg' %}" alt="english">
+                                                </span>
+                                                <span class="nav-text">{{language.title | title }}</span>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <div class="tab-content">
+                            {{ formSet.management_form }}
+                            {% for form in formSet.forms %}
+                                {% for language in languages %}
+                                    {% if forloop.counter == forloop.parentloop.counter %}
+                                        <div class="tab-pane fade {% if language.lang_code == 'en' %}active show{% endif %}"
+                                            id="{{language.lang_code}}div" role="tabpanel" aria-labelledby="">
+                                            <div class="row">
+                                                <div class="col-xl-12">
+                                                    <div class="row">
+                                                        {% for field in form %}
+                                                            {% if field.name == "page_title" %}
+                                                                <div class="col-xl-6">
+                                                                    <!--begin::Input-->
+                                                                    <div class="form-group">
+                                                                        <label> Page Title <span class="text-danger"> {% if language.lang_code == 'en' %}*{% endif %} </span> </label>
+                                                                        <input type="text" value="{{field.value}}" name="{{field.auto_id | cut:'id_'}}" placeholder="Page title" class="form-control form-control-solid form-control-lg {% if field.errors.as_text and language.lang_code == 'en'  %} is-invalid {% endif %}">
+                                                                        <div class="invalid-feedback">
+                                                                            {% if language.lang_code == 'en' %}
+                                                                                {{ field.errors.as_text | cut:"* " }}
+                                                                            {% endif %}
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--end::Input-->
+                                                                </div>
+                                                            {% elif field.name == "description" %}
+                                                                <div class="col-xl-12">
+                                                                    <!--begin::Input-->
+                                                                    <div class="form-group">
+                                                                        <div id="kt-ckeditor-1-toolbar">
+                                                                        </div>
+                                                                        <label>Description<span class="text-danger"> {% if language.lang_code == 'en' %}*{% endif %} </span> </label>
+                                                                        <textarea class="form-control {% if field.errors.as_text %} is-invalid {% endif %}" id="description_{{language.lang_code}}"  name="{{field.auto_id | cut:'id_'}}">
+                                                                            {{field.value}}
+                                                                        </textarea>
+                                                                        <div class="invalid-feedback">
+                                                                            {% if language.lang_code == 'en' %}
+                                                                                {{ field.errors.as_text | cut:"* " }}
+                                                                            {% endif %}
+                                                                        </div>
+                                                                    </div>
+                                                                    <script>		
+                                                                        CKEDITOR.replace("description_{{language.lang_code}}",
+                                                                        {
+                                                                        height: 300,
+                                                                        filebrowserImageWindowWidth : '640',
+                                                                        filebrowserImageWindowHeight : '480',
+                                                                        enterMode : CKEDITOR.ENTER_BR
+                                                                        });
+                                                                    </script>
+                                                                </div>    
+                                                            {% endif %}
+                                                        {% endfor %}                                                                
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                        <div class="d-flex justify-content-between border-top mt-5 pt-10">
+                      
+                            <div>
+                                <button button type="submit"
+                                    class="btn btn-success font-weight-bold text-uppercase px-9 py-4">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

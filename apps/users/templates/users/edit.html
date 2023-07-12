@@ -1,0 +1,86 @@
+{% extends "default.html" %}
+{% load static %}
+{% block content %}
+<!--begin::Content-->
+<div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Subheader-->
+	<div class="subheader py-2 py-lg-4  subheader-solid " id="kt_subheader">
+		<div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+			<!--begin::Info-->
+			<div class="d-flex align-items-center flex-wrap mr-1">
+				<!--begin::Page Heading-->
+				<div class="d-flex align-items-baseline flex-wrap mr-5">
+					<!--begin::Page Title-->
+					<h5 class="text-dark font-weight-bold my-1 mr-5">
+						Edit User 
+					</h5>
+					<!--end::Page Title-->
+					<!--begin::Breadcrumb-->
+					<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+						<li class="breadcrumb-item">
+							<a href="{% url 'dashboard.index' %}" class="text-muted">Dashboard</a>
+						</li>
+						<li class="breadcrumb-item">
+							<a href="{% url 'users.index' %}" class="text-muted">{{model_name_plural}}</a>
+						</li>
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page Heading-->
+			</div>
+			<!--end::Info-->
+		</div>
+	</div>
+	<!--end::Subheader-->
+	<!--begin::Entry-->
+	<div class="d-flex flex-column-fluid">
+		<!--begin::Container-->
+		<div class=" container ">
+			<form class="mws-form" autocomplete="off" method="POST" action="{% url 'users.edit' user_data.id %}"
+				enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="card">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-xl-1"></div>
+							<div class="col-xl-10">
+								<h3 class="mb-10 font-weight-bold text-dark">
+									{{model_name_singular}} Information
+								</h3>
+								<div class="row">
+									{% for field in form %}
+										<div class="col-xl-6">
+											<!--begin::Input-->
+											<div class="form-group">
+												<label>{{field.label}}<span class="text-danger"> * </span></label>
+												{{field}}
+												<div class="invalid-feedback">
+													{{field.errors.as_text | cut:"* "}}
+												</div>
+											</div>
+											<!--end::Input-->
+										</div>
+									{% endfor %}
+								</div>
+								<div class="d-flex justify-content-between border-top mt-5 pt-10">
+									<div>
+										<button button type="submit" onclick="submit_form();"
+											class="btn btn-success font-weight-bold text-uppercase px-9 py-4">
+											Submit
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	function submit_form() {
+		$(".mws-form").submit();
+	}
+</script>
+{% endblock %}

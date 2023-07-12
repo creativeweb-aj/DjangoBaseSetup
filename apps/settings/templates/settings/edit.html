@@ -1,0 +1,260 @@
+{% extends "default.html" %}
+{% load static %}
+{% block content %}
+{% load site_tags %}
+<!--begin::Content-->
+<div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Subheader-->
+    <div class="subheader py-2 py-lg-4  subheader-solid " id="kt_subheader">
+        <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+            <!--begin::Info-->
+            <div class="d-flex align-items-center flex-wrap mr-1">
+                <!--begin::Page Heading-->
+                <div class="d-flex align-items-baseline flex-wrap mr-5">
+                    <!--begin::Page Title-->
+                    <h5 class="text-dark font-weight-bold my-1 mr-5">
+                        Edit Setting
+                    </h5>
+                    <!--end::Page Title-->
+                    <!--begin::Breadcrumb-->
+                    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'dashboard.index' %}" class="text-muted">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'settings.index' %}" class="text-muted">
+                                Back To Setting 
+                            </a>
+                        </li>
+                    </ul>
+                    <!--end::Breadcrumb-->
+                </div>
+                <!--end::Page Heading-->
+            </div>
+            <!--end::Info-->
+        </div>
+    </div>
+    <!--end::Subheader-->
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class=" container ">
+            <form class='mws-form' action="{% url 'settings.edit' settings_detail.id %}" autocomplete="off" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-xl-1"></div>
+                            <div class="col-xl-10">
+                                <h3 class="mb-10 font-weight-bold text-dark"></h3>
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <!--begin::Input-->
+                                        <div class="form-group">
+                                            <label>Title <span class="text-danger">*</span></label>
+                                            <input type="text" name="title" value="{{form.title}}"
+                                                class='form-control form-control-solid form-control-lg {% if errors.title %} is-invalid {% endif %}' />
+                                            <div class="invalid-feedback">
+                                                {{errors.title }}
+                                            </div>
+                                        </div>
+                                        <!--end::Input-->
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <!--begin::Input-->
+                                        <div class="form-group">
+                                            <label>Key <span class="text-danger"> * </span> </label>
+                                            <input type="text" name="key" value="{{form.key}}"
+                                                class='form-control form-control-solid form-control-lg {% if errors.key %} is-invalid {% endif %}' />
+                                            <div class="invalid-feedback">
+                                                {{errors.key }}
+                                            </div>
+                                            <small>e.g., 'Site.title'</small>
+                                        </div>
+                                        <!--end::Input-->
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <!--begin::Input-->
+                                        <div class="form-group">
+                                            <label>Input Type <span class="text-danger"> * </span></label>
+                                            <select name="input_type"
+                                                class="form-control form-control-solid form-control-lg input_type {% if errors.value %} is-invalid {% endif %}"
+                                                id="id_input_type">
+                                                <option value="">Select Input Type</option>
+                                                <option value="text" {% if form.input_type == 'text' %}
+                                                    selected="selected" {% endif %}>Text</option>
+                                                <option value="textarea" {% if form.input_type == 'textarea' %}
+                                                    selected="selected" {% endif %}>Textarea</option>
+                                                <option value="select" {% if form.input_type == 'select' %}
+                                                    selected="selected" {% endif %}>Select</option>
+                                                <option value="checkbox" {% if form.input_type == 'checkbox' %}
+                                                    selected="selected" {% endif %}>Checkbox</option>
+                                                <option value="radio" {% if form.input_type == 'radio' %}
+                                                    selected="selected" {% endif %}>Radio</option>
+                                                <option value="file" {% if form.input_type == 'file' %}
+                                                    selected="selected" {% endif %}>File</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                {{errors.input_type }}
+                                            </div>
+                                            <small>
+                                                <em> e.g., 'text' or 'textarea'</em>
+                                            </small>
+                                        </div>
+                                        <!--end::Input-->
+                                    </div>
+                                    <div class="col-xl-6 valueclass" id="textAreId">
+                                        <!--begin::Input-->
+                                        <div class="form-group">
+                                            <label>Value <span class="text-danger"> * </span> </label>
+                                            <textarea name="value" id="textAreIdInput" class="form-control form-control-solid form-control-lg inputclass {% if errors.value %} is-invalid {% endif %}">{{form.value}}</textarea>
+                                            <div class="invalid-feedback">
+                                                {{errors.value}}
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                    <div class="col-xl-6 valueclass" id="fileId">
+                                        <!--begin::Input-->
+                                        <div class="form-group">
+                                            <label>Attchment <span class="text-danger"> * </span> </label>
+                                            <input type="file" name="attachment" placeholder="value" id="fileIdInput"
+                                                class="form-control form-control-solid form-control-lg inputclass {% if errors.value %} is-invalid {% endif %}" />
+                                            <div class="invalid-feedback">
+                                                {{errors.value}}
+                                            </div>                                            
+                                            {% if form.input_type == 'file' %}
+							                    {% if form.value %}
+                                                    <a class="fancybox-buttons" data-fancybox-group="button" href="{{form.value}}">
+                                                        <img height="100" width="100" accept="image/*"  src="{{form.value}}"/>
+                                                    </a>
+                                                 {% endif %}
+                                            {% endif %}
+                                        </div>
+                                    </div>                                   
+                                    <div class="col-xl-6 valueclass" id="radioId">
+                                        <!--begin::Input-->
+                                        <div class="form-group">
+                                            <label>Radio <span class="text-danger">*</span></label>
+                                            <input type='radio' name="radio" class="inputclass" value="{{settings_detail.value}}" id="radioIdInput" />
+                                            <div class="invalid-feedback">
+                                                {{errors.value}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 valueclass" id="checkBoxId">
+                                        <!--begin::Input-->
+                                        <div class="form-group">
+                                            <label>Checkbox<span class="text-danger">*</span> </label>
+                                            <input type='checkbox' name="checkbox" class="inputclass" id="checkBoxIdInput" value="{{settings_detail.value}}" />
+                                            <div class="invalid-feedback">
+                                                {{errors.value}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <!--begin::Input-->
+                                        <div class="form-group">
+                                            <label>Editable <span class="text-danger"> * </span>
+                                            </label>
+                                            <input type="checkbox" id="editable" name="editable">
+                                            <input type="text" disabled="disabled" size="16" name="prependedInput2"
+                                                class="small" style="width:415px;" id="prependedInput2"
+                                                value="Editable" />
+                                        </div>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between border-top mt-5 pt-10">
+                                    <div>
+                                        <button button type="submit"
+                                            class="btn btn-success font-weight-bold text-uppercase px-9 py-4">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        showImageDiv("{{settings_detail.input_type}}");
+
+        $("#id_input_type").change(function (e) {
+            var value = e.target.value
+            console.info(value)
+            showImageDiv(value);
+        });
+
+        $('#radioIdInput').change(function(e){
+            var checked = e.target.checked
+            if(checked){
+                $(this).val('1')
+            }else{
+                $(this).val('0')
+            }
+        })
+    });
+
+    function showImageDiv(value) {
+        $('.valueclass').hide()
+        if (value == "text" || value == "textarea" || value == "select") {
+            $("#textAreId").show()
+        }
+        else if (value == "file") {
+            $("#fileId").show()
+        }
+        else if(value == "radio"){
+            $("#radioId").show()
+            setCheckBoxValue()
+        }
+        else if (value == "checkbox") {
+            $("#checkBoxId").show()
+            setCheckBoxValue()
+        }
+    }
+    
+    function setCheckBoxValue(){
+        var inputType = "{{settings_detail.input_type}}"
+
+        if(inputType == 'checkbox'){
+            try{
+                var checkValue = "{{settings_detail.value}}"
+            }catch(e){
+                var checkValue = null
+            }
+
+            if(checkValue == 1){
+                $('#checkBoxIdInput').prop('checked', true)
+            }else{
+                $('#checkBoxIdInput').prop('checked', false)
+            }
+        }
+        if(inputType == 'radio'){
+            try{
+                var checkValue = "{{settings_detail.value}}"
+            }catch(e){
+                var checkValue = null
+            }
+
+            if(checkValue == 1){
+                $("input[name=radio][value=" + checkValue + "]").prop('checked', true);
+            }else{
+                $("input[name=radio][value=" + checkValue + "]").prop('checked', false);
+            }
+        }
+        var editAble = '{{settings_detail.editable}}'
+        if(editAble == 1){
+            $('#editable').prop('checked', true)
+        }else{
+            $('#editable').prop('checked', false)
+        }
+    }
+</script>
+{% endblock %}

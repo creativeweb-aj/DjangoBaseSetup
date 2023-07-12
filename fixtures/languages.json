@@ -1,0 +1,1 @@
+[{"model": "languages.languages", "pk": 1, "fields": {"created_at": "2022-11-21T13:12:09.357Z", "updated_at": "2022-11-21T13:12:09.357Z", "title": "English", "lang_code": "en", "folder_code": "en", "is_active": true}}]

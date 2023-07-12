@@ -1,0 +1,202 @@
+{% extends "default.html" %}
+{% load static %}
+{% block content %}
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Subheader-->
+  <div class="subheader py-2 py-lg-4 subheader-solid" id="kt_subheader">
+    <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+      <!--begin::Info-->
+      <div class="d-flex align-items-center flex-wrap mr-1">
+        <!--begin::Page Heading-->
+        <div class="d-flex align-items-baseline flex-wrap mr-5">
+          <!--begin::Page Title-->
+          <h5 class="text-dark font-weight-bold my-1 mr-5">
+            Edit Acl Management
+          </h5>
+          <!--end::Page Title-->
+          <!--begin::Breadcrumb-->
+          <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+            <li class="breadcrumb-item">
+              <a href="{% url 'dashboard.index'%}" class="text-muted">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="{% url 'module.index'%}" class="text-muted">
+                Acl Management
+              </a>
+            </li>
+          </ul>
+          <!--end::Breadcrumb-->
+        </div>
+        <!--end::Page Heading-->
+      </div>
+      <!--end::Info-->
+    </div>
+  </div>
+  <!--end::Subheader-->
+  <!--begin::Entry-->
+  <div class="d-flex flex-column-fluid">
+    <!--begin::Container-->
+    <div class="container">
+      <form class="mws-form" autocomplete="off" method="POST" action="{% url 'module.edit' module_data.id %}">
+        {% csrf_token %}
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-xl-1"></div>
+              <div class="col-xl-10">
+                <h3 class="mb-10 font-weight-bold text-dark">
+                  Acl Management Information
+                </h3>
+                <div class="row">
+                  {% for field in form %}
+                    <div class="col-xl-6">
+                      <!--begin::Input-->
+                      <div class="form-group">
+                        <label>{{field.label}}<span class="text-danger">*</span></label>
+                        {{field}}
+                        <div class="invalid-feedback">
+                          {{field.errors.as_text | cut:"* "}}
+                        </div>
+                      </div>
+                      <!--end::Input-->
+                    </div>
+                  {% endfor %}
+                  <div class="row">
+                    <div class="col-md-12">
+                      <table class="table table-bordered lastsizedetailsrow">
+                        <thead>
+                          <th colspan="2">
+                            <center>ACTION TYPE</center>
+                          </th>
+                          <th>
+                            <input style="float: right" type="button" value="Add More" class="btn btn-info"
+                              onclick="acco_add_more_size();" />
+                          </th>
+                        </thead>
+                        <tr>
+                          <th width="50%">
+                            <center>Name</center>
+                          </th>
+                          <th width="50%">
+                            <center>Function Name</center>
+                          </th>
+                          <th></th>
+                        </tr>
+                        <input class="form-control" id="count" name="count" type="text" value="{{action_count}}"
+                          hidden />
+                        {% for data in admin_module %}
+                          <tr class="panel panel-default delete_add_more_accor_{{ forloop.counter0 }}" rel="0">
+                            <td>
+                              <div class="mws-form-item">
+                                <input data-rel="0" class="form-control" name="name-{{ forloop.counter0 }}" type="text"
+                                  value="{{data.name}}" />
+                              </div>
+                            </td>
+                            <td>
+                              <div class="mws-form-item">
+                                <input data-rel="0" class="form-control" name="function_name-{{ forloop.counter0 }}"
+                                  type="text" value="{{data.function_name}}" />
+                              </div>
+                            </td>
+                            <td>
+                              <a href="javascript:void(0);" onclick="del_row('{{ forloop.counter0 }}');"
+                                class="btn btn-danger btn-small">
+                                <i class="fa fa-trash"></i>
+                              </a>
+                            </td>
+                          </tr>
+                        {% endfor %}
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between border-top mt-5 pt-10">
+                  <div>
+                    <button button type="submit" onclick="submit_form();" class="btn btn-success font-weight-bold text-uppercase px-9 py-4">
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="https://unpkg.com/@reactivex/rxjs@5.0.0-beta.7/dist/global/Rx.umd.js"></script>
+<script>
+  function doIt(e) {
+    var e = e || event;
+    if (e.keyCode == 32) return false;
+  }
+  window.onload = function () {
+    var inp = document.getElementById("zip_code");
+
+    inp.onkeydown = doIt;
+  };
+
+  function submit_form() {
+    $(".mws-form").submit();
+  }
+
+  $(".chosenselect_country").select2({
+    placeholder: "Select Country",
+    allowClear: true,
+  });
+</script>
+
+<script>
+  /*Function for add more size details*/
+  var count = $("#count").val();
+
+  function acco_add_more_size() {
+    //debugger
+    count++;
+
+    //$("#count").val(count);
+    $('#count').attr('value', count)
+    var get_last_id = $(".lastsizedetailsrow").find("tr").last().attr("rel");
+    var counter = parseInt(get_last_id) + 1;
+
+    $.ajax({
+      url: "/acl/add-more-action/?index=" + count,
+      type: "get",
+
+      success: function (response) {
+        var data_body = escapeHtml(response.body);
+
+        $(".lastsizedetailsrow").find("tr").last().after(data_body);
+      },
+    });
+  }
+  function escapeHtml(str) {
+    return str.replace(/\\/g, "");
+    //return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+  }
+
+  /*Function for delete add more size details*/
+  function del_row(count) {
+
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Want to delete this ?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it",
+      cancelButtonText: "No, cancel",
+      reverseButtons: true,
+    }).then(function (result) {
+      if (result.value) {
+
+        $(".delete_add_more_accor_" + count).remove();
+      } else if (result.dismiss === "cancel") {
+        Swal.fire("Cancelled", "Your imaginary file is safe :)", "error");
+      }
+    });
+  }
+</script>
+{% endblock %}

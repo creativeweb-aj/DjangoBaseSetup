@@ -1,0 +1,303 @@
+{% extends "default.html" %}
+{% load static %}
+{% block content %}
+
+<!--begin::Content-->
+<div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Subheader-->
+	<div class="subheader py-2 py-lg-4  subheader-solid " id="kt_subheader">
+		<div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+			<!--begin::Info-->
+			<div class="d-flex align-items-center flex-wrap mr-1">
+				<!--begin::Page Heading-->
+				<div class="d-flex align-items-baseline flex-wrap mr-5">
+					<!--begin::Page Title-->
+					<h5 class="text-dark font-weight-bold my-1 mr-5">
+						Dashboard 
+					</h5>
+					<!--end::Page Title-->
+
+					<!--begin::Breadcrumb-->
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page Heading-->
+			</div>
+			<!--end::Info-->
+		</div>
+	</div>
+	<!--end::Subheader-->
+	<!--begin::Entry-->
+	<div class="d-flex flex-column-fluid">
+		<!--begin::Container-->
+		<div class=" container ">
+			<div class="row">
+				<div class="col-lg-3">
+					<!--begin::Stats Widget 13-->
+					<a href="{% url 'users.index' %}" class="card card-custom bg-dark bg-hover-state-dark card-stretch gutter-b">
+						<!--begin::Body-->
+						<div class="card-body">
+							<span class="svg-icon menu-icon-dark svg-icon-3x ml-nl">
+								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<rect x="0" y="0" width="24" height="24"></rect>
+										<rect fill="#000000" opacity="0.3" x="2" y="2" width="10" height="12" rx="2"></rect>
+										<path d="M4,6 L20,6 C21.1045695,6 22,6.8954305 22,8 L22,20 C22,21.1045695 21.1045695,22 20,22 L4,22 C2.8954305,22 2,21.1045695 2,20 L2,8 C2,6.8954305 2.8954305,6 4,6 Z M18,16 C19.1045695,16 20,15.1045695 20,14 C20,12.8954305 19.1045695,12 18,12 C16.8954305,12 16,12.8954305 16,14 C16,15.1045695 16.8954305,16 18,16 Z" fill="#000000"></path>
+									</g>
+								</svg>
+							<!--end::Svg Icon-->
+						</span>
+
+							<div class="card-title font-weight-bolder text-light font-size-h2 mb-0 mt-6 d-block">
+								{{total_user}}
+							</div>
+							<div class="font-weight-bold text-light  font-size-sm">
+								Total Active Users
+							</div>
+						</div>
+						<!--end::Body-->
+					</a>
+					<!--end::Stats Widget 13-->
+				</div>
+			</div>
+
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card card-custom gutter-b">
+						<!--begin::Header-->
+						<div class="card-header border-0 py-5">
+							<h3 class="card-title align-items-start flex-column">
+								<span class="card-label font-weight-bolder text-dark">
+									Recent {{model_name_plural}}
+								</span>
+								<span class="text-muted mt-3 font-weight-bold font-size-sm">More than
+									{{ total_users }}+ {{model_name_plural}}
+								</span>
+							</h3>
+							<div class="card-toolbar">
+								<a href="{% url 'users.index' %}"
+									class="btn btn-info font-weight-bolder font-size-sm mr-3">View
+									All
+								</a>
+							</div>
+						</div> 
+						<!--end::Header-->
+						<!--begin::Body-->
+
+						<div class="card-body pt-0 pb-3">
+							<div class="tab-content">
+								<!--begin::Table-->
+								<div class="table-responsive">
+									<table
+										class="table table-head-custom table-head-bg table-borderless table-vertical-center">
+										<thead>
+											<tr class="text-left text-uppercase">
+												<th>
+													<span class="text-dark-75">SN</span>
+												</th>
+												<th style="min-width: 100px" class="pl-7">
+													<span class="text-dark-75">Name</span>
+												</th>
+												<th style="min-width: 100px">
+													<span class="text-dark-75">Email</span>
+												</th>
+
+												<th style="min-width: 100px">
+													<span class="text-dark-75">Mobile</span>
+												</th>
+
+												<th style="min-width: 100px">
+													<span class="text-dark-75">Status</span>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% if users %}
+												{% for user in users %}
+													<tr>
+														<td>
+															<div class="symbol symbol-30 symbol-light mr-4">
+																<span class="symbol-label font-weight-bold text-dark-75">
+																	{{ forloop.counter }}
+																</span>
+															</div>
+														</td>
+														<td class="pl-0 py-8">
+															<div class="d-flex align-items-center">
+																<div class="text-muted font-weight-bold d-block">
+																	{{ user.first_name |title }} {{user.last_name | title}}
+																</div>
+															</div>
+														</td>
+														<td>
+															<span class="text-muted font-weight-bold d-block">
+																{{user.email}}
+															</span>
+														</td>
+														<td>
+															<span class="text-muted font-weight-bold d-block">
+																{{user.mobile_number}}
+															</span>
+														</td>
+														<td>
+															{% if user.is_active == 0 %}
+																<span class="label label-lg label-light-danger label-inline">Deactive</span>
+															{% else %}
+																<span class="label label-lg label-light-success label-inline">Active</span>
+															{% endif %}
+														</td>
+													</tr>
+												{% endfor %}
+											{% else %}
+											<tr>
+												<td colspan="6" style="text-align:center;"> Record not found.</td>
+											</tr>
+											{% endif %}
+										</tbody>
+									</table>
+								</div>
+								<!--end::Table-->
+							</div>
+						</div>
+						<!--end::Body-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--end::Container-->
+	</div>
+	<!--end::Entry-->
+</div>
+<!--end::Content-->
+
+
+<script>
+	$(document).ready(function () {
+		var users = '{{user_list_mnt|safe}}'
+		users = JSON.parse(users)
+
+		var _initChartsWidget5 = function () {
+			var element = document.getElementById("kt_charts_widget_5_chart");
+
+			if (!element) {
+				return;
+			}
+
+			var options = {
+				series: [{
+					name: 'Total Users',
+					type: 'bar',
+					data: users['user_data_count']
+				}],
+				chart: {
+					stacked: true,
+					height: 350,
+					toolbar: {
+						show: false
+					}
+				},
+				plotOptions: {
+					bar: {
+						stacked: true,
+						horizontal: false,
+						dataLabels: {
+							position: 'center',
+						},
+					},
+				},
+				legend: {
+					show: false
+				},
+				dataLabels: {
+					enabled: true
+				},
+				stroke: {
+					curve: 'smooth',
+					show: true,
+					width: 2,
+					colors: ['transparent']
+				},
+				xaxis: {
+					categories: users['user_data_mnt'],
+					axisBorder: {
+						show: false,
+					},
+					axisTicks: {
+						show: false
+					},
+				},
+				yaxis: {
+					labels: {
+						style: {
+							colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+							fontSize: '12px',
+							fontFamily: KTApp.getSettings()['font-family']
+						},
+						formatter: function (val, index) {
+							return Math.round(val);
+						}
+					}
+				},
+				fill: {
+					opacity: 1
+				},
+				states: {
+					normal: {
+						filter: {
+							type: 'none',
+							value: 0
+						}
+					},
+					hover: {
+						filter: {
+							type: 'none',
+							value: 0
+						}
+					},
+					active: {
+						allowMultipleDataPointsSelection: false,
+						filter: {
+							type: 'none',
+							value: 0
+						}
+					}
+				},
+				tooltip: {
+					style: {
+						fontSize: '12px',
+						fontFamily: KTApp.getSettings()['font-family']
+					},
+					y: {
+						formatter: function (val) {
+							return val
+						}
+					}
+				},
+				colors: [KTApp.getSettings()['colors']['theme']['base']['info'], KTApp.getSettings()['colors']['theme']['base']['primary'], KTApp.getSettings()['colors']['theme']['light']['primary']],
+				grid: {
+					borderColor: KTApp.getSettings()['colors']['gray']['gray-200'],
+					strokeDashArray: 4,
+					yaxis: {
+						lines: {
+							show: true
+						}
+					},
+					padding: {
+						top: 0,
+						right: 0,
+						bottom: 0,
+						left: 0
+					}
+				}
+			};
+
+			var chart = new ApexCharts(element, options);
+			chart.render();
+		}
+
+
+		_initChartsWidget5();
+
+	});
+</script>
+{% endblock %}
