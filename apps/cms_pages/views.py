@@ -104,7 +104,7 @@ def add(request):
     languages = Languages.objects.filter(is_active=1)
     if request.method == "POST":
         form = CmsForm(request.POST)
-        formSet = CmsLangFormSet(request.POST, prefix='cms')
+        formSet = CmsLangFormSet(request.POST, prefix='CmsApi')
         if form.is_valid() and formSet.is_valid():
             formData = form.cleaned_data
             formSetData = formSet.cleaned_data
@@ -126,7 +126,7 @@ def add(request):
             return redirect('cms_pages.index')
     else:
         form = CmsForm()
-        formSet = CmsLangFormSet(prefix='cms')
+        formSet = CmsLangFormSet(prefix='CmsApi')
     context = {
         "form": form,
         "formSet": formSet,
@@ -147,7 +147,7 @@ def edit(request, id):
         formSet = CmsLangFormSet(request.POST, prefix='cmsEdit')
         if formSet.is_valid():
             formSetData = formSet.cleaned_data
-            # Update cms page data
+            # Update CmsApi page data
             cmsPage = CmsPages.objects.get(id=id)
 
             cmsPage.page_title = formSetData[0].get("page_title")

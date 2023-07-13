@@ -49,7 +49,7 @@ class ProfileEditForm(forms.ModelForm):
         label='First Name',
         widget=forms.TextInput(attrs={'class': "form-control form-control-solid form-control-lg"}),
         error_messages={
-            'required': ValidationMessages.the_name_field_is_required.value
+            'required': ValidationMessages.the_first_name_field_is_required.value
         }
     )
     last_name = forms.CharField(
@@ -57,7 +57,7 @@ class ProfileEditForm(forms.ModelForm):
         label='Last Name',
         widget=forms.TextInput(attrs={'class': "form-control form-control-solid form-control-lg"}),
         error_messages={
-            'required': ValidationMessages.the_name_field_is_required.value
+            'required': ValidationMessages.the_last_name_field_is_required.value
         }
     )
     email = forms.EmailField(

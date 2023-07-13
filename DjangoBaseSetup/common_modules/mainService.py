@@ -268,7 +268,7 @@ class MainService:
     @staticmethod
     def getDefaultImages(imageType: str):
         image = None
-        if imageType == "user":
+        if imageType == "UserApi":
             settingObj = Setting.objects.filter(key="Site.user_image").first()
             image = settingObj.value
         elif imageType == "hospital":

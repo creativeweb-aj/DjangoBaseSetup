@@ -2,9 +2,9 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from apps.api.modules import responseData
-from zeero_bills.common_modules.mainService import Status
-from zeero_bills.messages.messages import ApiResponseMessage
-from apps.api.modules.cms.CmsService import CmsService
+from DjangoBaseSetup.common_modules.mainService import Status
+from DjangoBaseSetup.messages.messages import ApiResponseMessage
+from apps.api.modules.CmsApi.service import CmsService
 
 
 @swagger_auto_schema(

@@ -7,7 +7,7 @@ urlpatterns = [
     path('edit/<int:id>/', views.edit, name='users.edit'),
     path('view/<int:id>/', views.view, name='users.view'),
     path('change-status/<int:id>/', views.status, name='users.status'),
-    path('user-delete/<int:id>/', views.delete, name='user.delete'),
+    path('UserApi-delete/<int:id>/', views.delete, name='UserApi.delete'),
     path('change-password/<int:id>/', views.changePassword, name='users.change_password'),
     path('send-credentials/<int:id>/', views.sendCredential, name='users.send_credential')
 ]

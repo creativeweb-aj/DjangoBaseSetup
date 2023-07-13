@@ -11,7 +11,7 @@ def getProfileImagePath(instance, filename):
         return os.path.join("uploads/profile/profile", filename)
 
 
-# Custom user manager
+# Custom UserApi manager
 class MyUserManager(BaseUserManager):
     def create_superuser(self, email, password=None):
         """
@@ -82,12 +82,12 @@ class User(AbstractBaseUser):
         return self.email
 
     def has_perm(self, perm, obj=None):
-        """Does the user have a specific permission?"""
+        """Does the UserApi have a specific permission?"""
         # Simplest possible answer: Yes, always
         return True
 
     def has_module_perms(self, app_label):
-        """Does the user have permissions to view the app `app_label`?"""
+        """Does the UserApi have permissions to view the app `app_label`?"""
         # Simplest possible answer: Yes, always
         return True
 

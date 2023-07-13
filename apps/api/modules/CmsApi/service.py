@@ -1,4 +1,4 @@
-from apps.api.modules.cms.CmsSerializer import CmsPageSerializer
+from apps.api.modules.CmsApi.serializer import CmsPageSerializer
 from apps.cms_pages.models import CmsPages
 
 

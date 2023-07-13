@@ -5,7 +5,7 @@ from datetime import timedelta
 SWAGGER_SETTINGS = {
     'DEFAULT_INFO': 'import.path.to.urls.api_info',
     'USE_SESSION_AUTH': False,
-    'exclude_namespaces': ['user.api.login'],
+    'exclude_namespaces': ['UserApi.api.login'],
     'SECURITY_DEFINITIONS': {
         'Bearer': {
             'type': 'apiKey',

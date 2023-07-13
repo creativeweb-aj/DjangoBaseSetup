@@ -24,7 +24,9 @@ class ValidationMessages(enum.Enum):
     the_email_is_not_valid = _('The email is not valid.')
     the_username_is_not_valid = _('The username is not valid.')
     the_email_is_not_exists = _('The email is not registered.')
-    emailIsExist = _('The email is already exist.')
+    username_is_exist = _('The username is already exist.')
+    email_is_exist = _('The email is already exist.')
+    email_is_not_exist = _('The email is not already exist.')
     the_new_password_field_is_required = _('The new password field is required.')
     the_new_password_should_contains_atleast_8_digits = _('The new password should contains at least 8 digits.')
     the_confirm_password_field_is_required = _('The confirm password field is required.')
@@ -35,7 +37,7 @@ class ValidationMessages(enum.Enum):
         'The password must contain upperchar lowerchar specchar numbers.')
     the_old_password_is_required = _('The old password is required.')
     the_old_password_is_not_correct = _('The old password is not correct.')
-    passNotMatch = _('The password is not match.')
+    password_not_match = _('The password is not match.')
     wrongCredentials = _('The credentials is not correct.')
     socialTypeRequired = _('The social type is required.')
     socialIdRequired = _('The social id is required.')
@@ -98,13 +100,12 @@ class ValidationMessages(enum.Enum):
     languageFolder = _('"The folder code field is required.')
 
     # Email_page validation messages
-    the_name_field_is_required = _('The name field is required.')
-    the_subject_field_is_required = _('The subject field is required.')
+    the_username_field_is_required = _('The username field is required.')
     the_email_body_field_is_required = _('The email body field is required.')
     the_action_field_is_required = _('The action field is required.')
 
     # users validations messages
-    the_user_name_field_is_required = _('The user name field is required.')
+    the_user_name_field_is_required = _('The UserApi name field is required.')
     the_first_name_field_is_required = _('The first name field is required.')
     the_phone_no_field_is_required = _('The phone no. field is required.')
     the_last_name_field_is_required = _('The last name field is required.')
@@ -234,6 +235,12 @@ class ApiResponseMessage(enum.Enum):
     transaction_id_not_added = _('Transaction Id not added.')
 
 
+class UserApiMessages(enum.Enum):
+    user_register_successfully = _('User register successfully!')
+    user_not_register = _('User not register!')
+    login_successfully = _('Login successfully!')
+
+
 # Login App
 class LoginMessages(enum.Enum):
     # Login view method messages
@@ -318,10 +325,10 @@ class UserMessages(enum.Enum):
     staff_deactivated = _('Staff has been deactivated successfully.')
     staff_activated = _('Staff has been activated successfully.')
 
-    # user Delete
+    # UserApi Delete
     user_has_been_deleted_successfully = _('User has been deleted successfully.')
 
-    # user Password 
+    # UserApi Password
     user_password_updated_successfully = _('User password updated successfully.')
 
 

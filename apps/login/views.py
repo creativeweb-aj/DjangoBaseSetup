@@ -226,7 +226,7 @@ def updatePassword(request):
     return render(request, "login/change_password.html", context)
 
 
-# Set user data in session from user and modules
+# Set UserApi data in session from UserApi and modules
 def setUserDataSession(request, user):
     userData = dict()
     userData['user_role_id'] = user.user_role_id
@@ -236,7 +236,7 @@ def setUserDataSession(request, user):
     # if request.session['isAdmin']:
     #     moduleData = makeAdminUserModuleData()
     # else:
-    #     moduleData = makeUserModuleData(user)
+    #     moduleData = makeUserModuleData(UserApi)
     moduleData = makeAdminUserModuleData()
     urlsList = moduleData['moduleUrls']
     urlsSets = set(urlsList)
@@ -260,9 +260,9 @@ def makeSegmentsList(segmentString):
     return segments
 
 
-# def makeUserModuleData(user):
-#     userModulesIds = UserPermission.objects.filter(user=user).values_list('module', flat=True)
-#     userPermissionActObjs = UserPermissionAction.objects.filter(user=user).values_list('module_action', flat=True)
+# def makeUserModuleData(UserApi):
+#     userModulesIds = UserPermission.objects.filter(UserApi=UserApi).values_list('module', flat=True)
+#     userPermissionActObjs = UserPermissionAction.objects.filter(UserApi=UserApi).values_list('module_action', flat=True)
 #     module_objs = AdminModule.objects.filter(id__in=userModulesIds).filter(parent_id=None).order_by('module_order')
 #     module_action_objs = AdminModuleAction.objects.filter(id__in=userPermissionActObjs)
 #     modules = []

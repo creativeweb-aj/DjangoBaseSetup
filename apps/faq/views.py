@@ -132,7 +132,7 @@ def edit(request, id):
         formSet = FaqLangFormSet(request.POST, prefix='faqEdit')
         if formSet.is_valid():
             formSetData = formSet.cleaned_data
-            # Update cms page data
+            # Update CmsApi page data
             faqObj = Faq.objects.get(id=id)
             faqObj.question = formSetData[0].get("question")
             faqObj.answer = formSetData[0].get("answer")
