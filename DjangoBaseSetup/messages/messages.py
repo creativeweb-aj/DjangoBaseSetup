@@ -46,6 +46,15 @@ class ValidationMessages(enum.Enum):
     action_field_is_required = _('Action field is required.')
     email_body_field_is_required = _('Email body field is required.')
 
+    # CMS form messages
+    page_name_field_is_required = _('Page name field is required.')
+    description_field_is_required = _('Description field is required.')
+    page_title_field_is_required = _('Page title field is required.')
+
+    # FAQ form messages
+    question_field_is_required = _('Question field is required.')
+    answer_field_is_required = _('Answer field is required.')
+
 
 # Login App
 class LoginMessages(enum.Enum):

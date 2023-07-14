@@ -15,7 +15,7 @@ class FaqForm(forms.ModelForm):
         initial='',
         widget=forms.TextInput(attrs={'class': "form-control form-control-solid form-control-lg"}),
         error_messages={
-            'required': ValidationMessages.the_question_field_is_required.value
+            'required': ValidationMessages.question_field_is_required.value
         }
     )
     answer = forms.CharField(
@@ -24,7 +24,7 @@ class FaqForm(forms.ModelForm):
         initial='',
         widget=forms.TextInput(attrs={'class': "form-control form-control-solid form-control-lg"}),
         error_messages={
-            'required': ValidationMessages.the_answer_field_is_required.value
+            'required': ValidationMessages.answer_field_is_required.value
         }
     )
 

@@ -14,7 +14,7 @@ class CmsLangForm(forms.Form):
         initial='',
         widget=forms.TextInput(attrs={'class': "form-control form-control-solid form-control-lg"}),
         error_messages={
-            'required': ValidationMessages.the_page_title_field_is_required.value
+            'required': ValidationMessages.page_title_field_is_required.value
         }
     )
     description = forms.CharField(
@@ -23,7 +23,7 @@ class CmsLangForm(forms.Form):
         initial='',
         widget=forms.TextInput(attrs={'class': "form-control form-control-solid form-control-lg"}),
         error_messages={
-            'required': ValidationMessages.the_description_field_is_required.value
+            'required': ValidationMessages.description_field_is_required.value
         }
     )
 
@@ -71,7 +71,7 @@ class CmsForm(forms.Form):
         initial='',
         widget=forms.TextInput(attrs={'class': "form-control form-control-solid form-control-lg"}),
         error_messages={
-            'required': ValidationMessages.the_page_name_field_is_required.value
+            'required': ValidationMessages.page_name_field_is_required.value
         }
     )
 
