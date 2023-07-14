@@ -12,7 +12,7 @@ class UserForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'User name'}),
         error_messages={
-            'required': ValidationMessages.the_user_name_field_is_required.value
+            'required': ValidationMessages.username_field_is_required.value
         }
     )
     first_name = forms.CharField(
@@ -22,7 +22,7 @@ class UserForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'First name'}),
         error_messages={
-            'required': ValidationMessages.the_first_name_field_is_required.value
+            'required': ValidationMessages.first_name_field_is_required.value
         }
     )
     last_name = forms.CharField(
@@ -32,7 +32,7 @@ class UserForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Last name'}),
         error_messages={
-            'required': ValidationMessages.the_last_name_field_is_required.value
+            'required': ValidationMessages.last_name_field_is_required.value
         }
     )
     email = forms.EmailField(
@@ -41,8 +41,8 @@ class UserForm(forms.ModelForm):
         initial='',
         widget=forms.TextInput(attrs={'class': "form-control form-control-solid form-control-lg"}),
         error_messages={
-            'required': ValidationMessages.the_email_field_is_required.value,
-            'invalid': ValidationMessages.the_email_is_not_valid.value
+            'required': ValidationMessages.email_field_is_required.value,
+            'invalid': ValidationMessages.email_is_not_valid.value
         }
     )
     mobile_number = forms.CharField(
@@ -52,7 +52,7 @@ class UserForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Phone number'}),
         error_messages={
-            'required': ValidationMessages.the_phone_no_field_is_required.value,
+            'required': ValidationMessages.mobile_field_is_required.value,
             'exists': ValidationMessages.mobile_number_exist.value,
             'minimum': ValidationMessages.mobile_number_minimum.value,
             'maximum': ValidationMessages.mobile_number_maximum.value,
@@ -114,7 +114,7 @@ class UserAddForm(forms.Form):
         widget=forms.TextInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'User name'}),
         error_messages={
-            'required': ValidationMessages.the_user_name_field_is_required.value
+            'required': ValidationMessages.username_field_is_required.value
         }
     )
     first_name = forms.CharField(
@@ -124,7 +124,7 @@ class UserAddForm(forms.Form):
         widget=forms.TextInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'First name'}),
         error_messages={
-            'required': ValidationMessages.the_first_name_field_is_required.value
+            'required': ValidationMessages.first_name_field_is_required.value
         }
     )
     last_name = forms.CharField(
@@ -134,7 +134,7 @@ class UserAddForm(forms.Form):
         widget=forms.TextInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Last name'}),
         error_messages={
-            'required': ValidationMessages.the_last_name_field_is_required.value
+            'required': ValidationMessages.last_name_field_is_required.value
         }
     )
     email = forms.EmailField(
@@ -144,9 +144,9 @@ class UserAddForm(forms.Form):
         widget=forms.TextInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Email'}),
         error_messages={
-            'required': ValidationMessages.the_email_field_is_required.value,
-            'invalid': ValidationMessages.the_email_is_not_valid.value,
-            'exists': ValidationMessages.the_email_is_already_exists.value
+            'required': ValidationMessages.email_field_is_required.value,
+            'invalid': ValidationMessages.email_is_not_valid.value,
+            'exists': ValidationMessages.email_is_already_exists.value
         }
     )
     mobile_number = forms.CharField(
@@ -156,7 +156,7 @@ class UserAddForm(forms.Form):
         widget=forms.TextInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Phone number'}),
         error_messages={
-            'required': ValidationMessages.the_phone_no_field_is_required.value,
+            'required': ValidationMessages.mobile_field_is_required.value,
             'exists': ValidationMessages.mobile_number_exist.value,
             'minimum': ValidationMessages.mobile_number_minimum.value,
             'maximum': ValidationMessages.mobile_number_maximum.value,
@@ -168,8 +168,8 @@ class UserAddForm(forms.Form):
         widget=forms.PasswordInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Password'}),
         error_messages={
-            'required': ValidationMessages.the_password_field_is_required.value,
-            'min_value': ValidationMessages.the_new_password_should_contains_atleast_8_digits.value,
+            'required': ValidationMessages.password_field_is_required.value,
+            'min_value': ValidationMessages.password_should_contains_atleast_8_digits.value,
         }
     )
     confirm_password = forms.CharField(
@@ -178,9 +178,9 @@ class UserAddForm(forms.Form):
         widget=forms.PasswordInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Confirm password'}),
         error_messages={
-            'required': ValidationMessages.the_confirm_password_field_is_required.value,
-            'min_value': ValidationMessages.the_confirm_password_should_contains_at_least_8_digits.value,
-            'validators': ValidationMessages.the_confirm_password_and_new_password_must_match.value
+            'required': ValidationMessages.confirm_password_field_is_required.value,
+            'min_value': ValidationMessages.confirm_password_should_contains_at_least_8_digits.value,
+            'validators': ValidationMessages.confirm_password_and_new_password_must_match.value
         }
     )
 
@@ -257,8 +257,8 @@ class UserPasswordChangeForm(forms.ModelForm):
         widget=forms.PasswordInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Password'}),
         error_messages={
-            'required': ValidationMessages.the_password_field_is_required.value,
-            'min_value': ValidationMessages.the_new_password_should_contains_atleast_8_digits.value,
+            'required': ValidationMessages.password_field_is_required.value,
+            'min_value': ValidationMessages.password_should_contains_atleast_8_digits.value,
         }
     )
     confirm_password = forms.CharField(
@@ -267,9 +267,9 @@ class UserPasswordChangeForm(forms.ModelForm):
         widget=forms.PasswordInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Confirm password'}),
         error_messages={
-            'required': ValidationMessages.the_confirm_password_field_is_required.value,
-            'min_value': ValidationMessages.the_confirm_password_should_contains_at_least_8_digits.value,
-            'validators': ValidationMessages.the_confirm_password_and_new_password_must_match.value
+            'required': ValidationMessages.confirm_password_field_is_required.value,
+            'min_value': ValidationMessages.confirm_password_should_contains_at_least_8_digits.value,
+            'validators': ValidationMessages.confirm_password_and_new_password_must_match.value
         }
     )
 

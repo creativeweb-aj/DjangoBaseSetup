@@ -3,6 +3,12 @@ from django.db import models
 from django.utils import timezone
 import os
 
+GENDER_CHOICES = (
+    ("male", "Male"),
+    ("female", "Female"),
+    ("other", "Other"),
+)
+
 
 def getProfileImagePath(instance, filename):
     if instance.id is not None:
@@ -48,6 +54,7 @@ class User(AbstractBaseUser):
     password = models.CharField(max_length=128, blank=True, null=True)
     confirm_password = models.CharField(max_length=128, blank=True, null=True)
 
+    gender = models.CharField(max_length=50, choices=GENDER_CHOICES, blank=True, null=True)
     image = models.ImageField(upload_to=getProfileImagePath, blank=True, null=True)
     address1 = models.CharField(max_length=255, blank=True, null=True)
     address2 = models.CharField(max_length=255, blank=True, null=True)

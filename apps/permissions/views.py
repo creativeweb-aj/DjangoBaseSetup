@@ -12,7 +12,7 @@ from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
 from .form import ModuleAddForm
 from .models import AdminModule, AdminModuleAction
-from DjangoBaseSetup.messages.messages import Permission
+from DjangoBaseSetup.messages.messages import PermissionMessages
 
 
 @login_required(login_url='login')
@@ -109,7 +109,7 @@ def add(request):
                 moduleAction.name = request.POST['name-' + str(i)]
                 moduleAction.function_name = request.POST['function_name-' + str(i)]
                 moduleAction.save()
-            messages.success(request, Permission.acl_has_been_added_successfully.value)
+            messages.success(request, PermissionMessages.acl_has_been_added_successfully.value)
             return redirect('module.index')
         else:
             for field in form.errors:
@@ -159,7 +159,7 @@ def edit(request, id):
                     moduleAction.save()
                 except:
                     pass
-            messages.success(request, Permission.acl_has_been_updated_successfully.value)
+            messages.success(request, PermissionMessages.acl_has_been_updated_successfully.value)
             return redirect('module.index')
         else:
             for field in form.errors:
@@ -180,7 +180,7 @@ def delete(request, id):
     if not isPermission:
         return redirect('dashboard.index')
     AdminModule.objects.filter(id=id).delete()
-    messages.success(request, Permission.acl_has_been_deleted_successfully.value)
+    messages.success(request, PermissionMessages.acl_has_been_deleted_successfully.value)
     return redirect('module.index')
 
 
@@ -195,10 +195,10 @@ def status(request, id):
         return redirect('dashboard.index')
     if module.is_active:
         module.is_active = False
-        messages.success(request, Permission.acl_deactivated.value)
+        messages.success(request, PermissionMessages.acl_deactivated.value)
     else:
         module.is_active = True
-        messages.success(request, Permission.acl_activated.value)
+        messages.success(request, PermissionMessages.acl_activated.value)
     module.save()
     return redirect('module.index')
 

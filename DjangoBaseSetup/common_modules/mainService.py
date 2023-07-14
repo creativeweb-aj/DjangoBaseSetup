@@ -10,7 +10,7 @@ import time
 import os
 import random, math, string
 from rest_framework_simplejwt.tokens import RefreshToken
-from DjangoBaseSetup.messages.messages import ValidationMessages
+from DjangoBaseSetup.messages.messages import MainMessages
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.hashers import make_password
 
@@ -188,13 +188,13 @@ class MainService:
     @staticmethod
     def fieldRequiredMessage(fields):
         for field in fields:
-            fields[field].error_messages["required"] = ValidationMessages.the.value + ' ' + \
+            fields[field].error_messages["required"] = MainMessages.the.value + ' ' + \
                                                        field.replace('_', ' ') + ' ' + \
-                                                       ValidationMessages.field_is_required.value.lower()
+                                                       MainMessages.field_is_required.value.lower()
 
-            fields[field].error_messages["blank"] = ValidationMessages.the.value + ' ' + \
+            fields[field].error_messages["blank"] = MainMessages.the.value + ' ' + \
                                                     field.replace('_', ' ') + ' ' + \
-                                                    ValidationMessages.field_is_required.value.lower()
+                                                    MainMessages.field_is_required.value.lower()
 
     @staticmethod
     def error_404(request, exception):

@@ -14,7 +14,7 @@ class UserLoginForm(forms.Form):
             attrs={'class': "form-control form-control-solid h-auto py-5 px-6 rounded-lg border-0 ",
                    'placeholder': 'Email'}),
         error_messages={
-            'required': ValidationMessages.the_email_field_is_required.value
+            'required': ValidationMessages.email_field_is_required.value
         }
     )
     password = forms.CharField(
@@ -24,7 +24,7 @@ class UserLoginForm(forms.Form):
             attrs={'class': "form-control form-control-solid h-auto py-5 px-6 rounded-lg border-0 ",
                    'placeholder': 'Password'}),
         error_messages={
-            'required': ValidationMessages.the_password_field_is_required.value
+            'required': ValidationMessages.password_field_is_required.value
         }
     )
 
@@ -49,7 +49,7 @@ class ProfileEditForm(forms.ModelForm):
         label='First Name',
         widget=forms.TextInput(attrs={'class': "form-control form-control-solid form-control-lg"}),
         error_messages={
-            'required': ValidationMessages.the_first_name_field_is_required.value
+            'required': ValidationMessages.first_name_field_is_required.value
         }
     )
     last_name = forms.CharField(
@@ -57,7 +57,7 @@ class ProfileEditForm(forms.ModelForm):
         label='Last Name',
         widget=forms.TextInput(attrs={'class': "form-control form-control-solid form-control-lg"}),
         error_messages={
-            'required': ValidationMessages.the_last_name_field_is_required.value
+            'required': ValidationMessages.last_name_field_is_required.value
         }
     )
     email = forms.EmailField(
@@ -65,8 +65,8 @@ class ProfileEditForm(forms.ModelForm):
         label='Email',
         widget=forms.TextInput(attrs={'class': "form-control form-control-solid form-control-lg"}),
         error_messages={
-            'required': ValidationMessages.the_email_field_is_required.value,
-            'invalid': ValidationMessages.the_email_is_not_valid.value
+            'required': ValidationMessages.email_field_is_required.value,
+            'invalid': ValidationMessages.email_is_not_valid.value
         }
     )
 
@@ -103,8 +103,8 @@ class PasswordChangeForm(forms.ModelForm):
         widget=forms.PasswordInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': "Old password"}),
         error_messages={
-            'required': ValidationMessages.the_old_password_is_required.value,
-            'error_messages': ValidationMessages.the_old_password_is_not_correct.value,
+            'required': ValidationMessages.old_password_is_required.value,
+            'error_messages': ValidationMessages.old_password_is_not_correct.value,
         }
     )
     new_password = forms.CharField(
@@ -113,8 +113,8 @@ class PasswordChangeForm(forms.ModelForm):
         widget=forms.PasswordInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': "New password"}),
         error_messages={
-            'required': ValidationMessages.the_new_password_field_is_required.value,
-            'min_value': ValidationMessages.the_confirm_password_should_contains_at_least_8_digits.value
+            'required': ValidationMessages.new_password_field_is_required.value,
+            'min_value': ValidationMessages.confirm_password_should_contains_at_least_8_digits.value
         }
     )
     confirm_password = forms.CharField(
@@ -123,9 +123,9 @@ class PasswordChangeForm(forms.ModelForm):
         widget=forms.PasswordInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': "Confirm password"}),
         error_messages={
-            'required': ValidationMessages.the_confirm_password_field_is_required.value,
-            'error_messages': ValidationMessages.the_confirm_password_and_new_password_must_match.value,
-            'min_value': ValidationMessages.the_confirm_password_should_contains_at_least_8_digits.value,
+            'required': ValidationMessages.confirm_password_field_is_required.value,
+            'error_messages': ValidationMessages.confirm_password_and_new_password_must_match.value,
+            'min_value': ValidationMessages.confirm_password_should_contains_at_least_8_digits.value,
         }
     )
 
@@ -176,9 +176,9 @@ class ForgotPasswordForm(forms.Form):
             attrs={'class': "form-control form-control-solid h-auto py-5 px-6 rounded-lg border-0",
                    'placeholder': "Email"}),
         error_messages={
-            'required': ValidationMessages.the_email_field_is_required.value,
-            'invalid': ValidationMessages.the_email_is_not_valid.value,
-            'exists': ValidationMessages.the_email_is_not_exists.value
+            'required': ValidationMessages.email_field_is_required.value,
+            'invalid': ValidationMessages.email_is_not_valid.value,
+            'exists': ValidationMessages.email_is_not_exists.value
         }
     )
 
@@ -203,8 +203,8 @@ class PasswordRestForm(forms.Form):
             attrs={'class': "form-control form-control-solid h-auto py-5 px-6 rounded-lg border-0 ",
                    'placeholder': "New password"}),
         error_messages={
-            'required': ValidationMessages.the_new_password_field_is_required.value,
-            'min_value': ValidationMessages.the_confirm_password_should_contains_at_least_8_digits.value,
+            'required': ValidationMessages.new_password_field_is_required.value,
+            'min_value': ValidationMessages.confirm_password_should_contains_at_least_8_digits.value,
         }
     )
     confirm_password = forms.CharField(
@@ -214,9 +214,9 @@ class PasswordRestForm(forms.Form):
             attrs={'class': "form-control form-control-solid h-auto py-5 px-6 rounded-lg border-0",
                    'placeholder': "Confirm password"}),
         error_messages={
-            'required': ValidationMessages.the_confirm_password_field_is_required.value,
-            'error_messages': ValidationMessages.the_confirm_password_and_new_password_must_match.value,
-            'min_value': ValidationMessages.the_confirm_password_should_contains_at_least_8_digits.value,
+            'required': ValidationMessages.confirm_password_field_is_required.value,
+            'error_messages': ValidationMessages.confirm_password_and_new_password_must_match.value,
+            'min_value': ValidationMessages.confirm_password_should_contains_at_least_8_digits.value,
         }
     )
 
@@ -250,7 +250,7 @@ class PasswordRestOtpForm(forms.Form):
             attrs={'class': "form-control form-control-solid h-auto py-5 px-6 rounded-lg border-0 ",
                    'placeholder': "OTP"}),
         error_messages={
-            'required': ValidationMessages.the_OTP_field_is_required.value,
+            'required': ValidationMessages.OTP_field_is_required.value,
         }
     )
 
@@ -261,9 +261,9 @@ class PasswordRestOtpForm(forms.Form):
             attrs={'class': "form-control form-control-solid h-auto py-5 px-6 rounded-lg border-0 ",
                    'placeholder': "New password"}),
         error_messages={
-            'required': ValidationMessages.the_new_password_field_is_required.value,
-            'min_value': ValidationMessages.the_confirm_password_should_contains_at_least_8_digits.value,
-            'passwordData': ValidationMessages.the_password_must_contain_upperchar_lowerchar_specchar_numbers.value
+            'required': ValidationMessages.new_password_field_is_required.value,
+            'min_value': ValidationMessages.confirm_password_should_contains_at_least_8_digits.value,
+            'passwordData': ValidationMessages.password_must_contain_upperchar_lowerchar_specchar_numbers.value
         }
     )
     confirm_password = forms.CharField(
@@ -273,11 +273,10 @@ class PasswordRestOtpForm(forms.Form):
             attrs={'class': "form-control form-control-solid h-auto py-5 px-6 rounded-lg border-0",
                    'placeholder': "Confirm password"}),
         error_messages={
-            'required': ValidationMessages.the_confirm_password_field_is_required.value,
-            'error_messages': ValidationMessages.the_confirm_password_and_new_password_must_match.value,
-            'min_value': ValidationMessages.the_confirm_password_should_contains_at_least_8_digits.value,
-            'passwordData': ValidationMessages.the_password_must_contain_upperchar_lowerchar_specchar_numbers.value
-
+            'required': ValidationMessages.confirm_password_field_is_required.value,
+            'error_messages': ValidationMessages.confirm_password_and_new_password_must_match.value,
+            'min_value': ValidationMessages.confirm_password_should_contains_at_least_8_digits.value,
+            'passwordData': ValidationMessages.password_must_contain_upperchar_lowerchar_specchar_numbers.value
         }
     )
 

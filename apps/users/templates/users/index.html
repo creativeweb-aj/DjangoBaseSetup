@@ -342,8 +342,8 @@
                                                                         </span>
                                                                     </a>
                                                                 {% endif %}  
-                                                                {% if 'user.delete' in actions or isAdmin %}  
-                                                                    <a href="{% url 'user.delete' user.id %}"
+                                                                {% if 'users.delete' in actions or isAdmin %}
+                                                                    <a href="{% url 'users.delete' user.id %}"
                                                                         class="btn btn-icon btn-light btn-hover-danger btn-sm confirmDelete"
                                                                         data-toggle="tooltip" data-placement="top"
                                                                         data-container="body" data-boundary="window" title=""

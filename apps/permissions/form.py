@@ -19,7 +19,7 @@ class ModuleAddForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Title'}),
         error_messages={
-            'required': ValidationMessages.the_title_field_is_required.value
+            'required': ValidationMessages.title_field_is_required.value
         }
     )
     path = forms.CharField(
@@ -28,7 +28,7 @@ class ModuleAddForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Path'}),
         error_messages={
-            'required': ValidationMessages.the_path_field_is_required.value
+            'required': ValidationMessages.path_field_is_required.value
         }
     )
     segment = forms.CharField(
@@ -37,7 +37,7 @@ class ModuleAddForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Segment'}),
         error_messages={
-            'required': ValidationMessages.the_segment_field_is_required.value
+            'required': ValidationMessages.segment_field_is_required.value
         }
     )
     module_order = forms.CharField(
@@ -46,7 +46,7 @@ class ModuleAddForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Order'}),
         error_messages={
-            'required': ValidationMessages.the_order_field_is_required.value
+            'required': ValidationMessages.order_field_is_required.value
         }
     )
     icon = forms.CharField(
@@ -55,7 +55,7 @@ class ModuleAddForm(forms.ModelForm):
         widget=forms.Textarea(
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Icon'}),
         error_messages={
-            'required': ValidationMessages.the_icon_field_is_required.value,
+            'required': ValidationMessages.icon_field_is_required.value,
 
         }
     )
