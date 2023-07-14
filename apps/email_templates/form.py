@@ -15,7 +15,7 @@ class EmailTemplateForm(forms.Form):
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Name'}
         ),
         error_messages={
-            'required': ValidationMessages.the_name_field_is_required.value
+            'required': ValidationMessages.name_field_is_required.value
         }
     )
     subject = forms.CharField(
@@ -26,7 +26,7 @@ class EmailTemplateForm(forms.Form):
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Name'}
         ),
         error_messages={
-            'required': ValidationMessages.the_subject_field_is_required.value
+            'required': ValidationMessages.subject_field_is_required.value
         }
     )
     action = forms.CharField(
@@ -37,7 +37,7 @@ class EmailTemplateForm(forms.Form):
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Name'}
         ),
         error_messages={
-            'required': ValidationMessages.the_action_field_is_required.value
+            'required': ValidationMessages.action_field_is_required.value
         }
     )
     body = forms.CharField(
@@ -48,7 +48,7 @@ class EmailTemplateForm(forms.Form):
             attrs={'class': "form-control form-control-solid form-control-lg", 'placeholder': 'Name'}
         ),
         error_messages={
-            'required': ValidationMessages.the_email_body_field_is_required.value
+            'required': ValidationMessages.email_body_field_is_required.value
         }
     )
 

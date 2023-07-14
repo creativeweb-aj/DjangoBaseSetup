@@ -30,7 +30,7 @@ urlpatterns = [
     path('', include('apps.login.urls')),
     path('dashboard/', include('apps.dashboard.urls')),
     path('users/', include('apps.users.urls')),
-    path('CmsApi-manager/', include('apps.cms_pages.urls')),
+    path('cms-manager/', include('apps.cms_pages.urls')),
     path('email-manager/', include('apps.email_templates.urls')),
     path('email-logs/', include('apps.email_logs.urls')),
     path('settings/', include('apps.settings.urls')),

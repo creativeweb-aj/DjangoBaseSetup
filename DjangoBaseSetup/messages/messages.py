@@ -40,6 +40,12 @@ class ValidationMessages(enum.Enum):
     order_field_is_required = _('Order field is required.')
     icon_field_is_required = _('Icon field is required.')
 
+    # Email form messages
+    name_field_is_required = _('Name field is required.')
+    subject_field_is_required = _('Subject field is required.')
+    action_field_is_required = _('Action field is required.')
+    email_body_field_is_required = _('Email body field is required.')
+
 
 # Login App
 class LoginMessages(enum.Enum):
