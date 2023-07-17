@@ -37899,7 +37899,7 @@ button {
 
 .btn.btn-hover-primary:hover:not(.btn-text):not(:disabled):not(.disabled), .btn.btn-hover-primary:focus:not(.btn-text), .btn.btn-hover-primary.focus:not(.btn-text) {
   color: #FFFFFF !important;
-  background-color: #3699FF !important;
+  background-color: #ffffff !important;
   border-color: #3699FF !important; }
   .btn.btn-hover-primary:hover:not(.btn-text):not(:disabled):not(.disabled) i, .btn.btn-hover-primary:focus:not(.btn-text) i, .btn.btn-hover-primary.focus:not(.btn-text) i {
     color: #FFFFFF !important; }
@@ -37917,7 +37917,7 @@ button {
 .show > .btn.btn-hover-primary.dropdown-toggle,
 .show .btn.btn-hover-primary.btn-dropdown {
   color: #FFFFFF !important;
-  background-color: #3699FF !important;
+  background-color: #ffffff !important;
   border-color: #3699FF !important; }
   .btn.btn-hover-primary:not(:disabled):not(.disabled):active:not(.btn-text) i, .btn.btn-hover-primary:not(:disabled):not(.disabled).active i,
   .show > .btn.btn-hover-primary.dropdown-toggle i,
@@ -39011,7 +39011,7 @@ button {
 
 .btn.btn-hover-success:hover:not(.btn-text):not(:disabled):not(.disabled), .btn.btn-hover-success:focus:not(.btn-text), .btn.btn-hover-success.focus:not(.btn-text) {
   color: #ffffff !important;
-  background-color: #1BC5BD !important;
+  background-color: #ffffff !important;
   border-color: #1BC5BD !important; }
   .btn.btn-hover-success:hover:not(.btn-text):not(:disabled):not(.disabled) i, .btn.btn-hover-success:focus:not(.btn-text) i, .btn.btn-hover-success.focus:not(.btn-text) i {
     color: #ffffff !important; }
@@ -40679,7 +40679,7 @@ button {
 
 .btn.btn-hover-danger:hover:not(.btn-text):not(:disabled):not(.disabled), .btn.btn-hover-danger:focus:not(.btn-text), .btn.btn-hover-danger.focus:not(.btn-text) {
   color: #ffffff !important;
-  background-color: #F64E60 !important;
+  background-color: #ffffff !important;
   border-color: #F64E60 !important; }
   .btn.btn-hover-danger:hover:not(.btn-text):not(:disabled):not(.disabled) i, .btn.btn-hover-danger:focus:not(.btn-text) i, .btn.btn-hover-danger.focus:not(.btn-text) i {
     color: #ffffff !important; }
@@ -45142,7 +45142,7 @@ code {
   letter-spacing: 0.1rem; }
 
 .table.table-head-bg thead tr, .table.table-head-bg thead th {
-  background-color: #F3F6F9;
+  background-color: #dfe6eb;
   border-bottom: 0;
   letter-spacing: 1px; }
   .table.table-head-bg thead tr:first-child, .table.table-head-bg thead th:first-child {
@@ -48334,7 +48334,7 @@ code {
     .symbol.symbol-circle .symbol-label {
       border-radius: 50%; }
   .symbol.symbol-primary .symbol-label {
-    background-color: #3699FF;
+    background-color: #000000;
     color: #FFFFFF; }
   .symbol.symbol-light-primary .symbol-label {
     background-color: #E1F0FF;
@@ -60030,7 +60030,7 @@ body {
   padding: 0px;
   font-size: 13px !important;
   font-weight: 400;
-  font-family: Poppins, Helvetica, "sans-serif";
+  font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
@@ -60095,7 +60095,7 @@ canvas {
       display: none !important; } }
 
 body {
-  background: #dee5e9; }
+  background: #dfe6eb; }
 
 @media (min-width: 992px) {
   .header-fixed .wrapper {
